@@ -4,10 +4,8 @@ import PaymentRequestForm from "./PaymentRequestButton";
 import { useEffect, useState } from "react";
 
 const stripePromise = loadStripe(
-  import.meta.env.PK_KEY
+  import.meta.env.VITE_PK_KEY
 );
-
-const STRIPE_SECRET_KEY = import.meta.env.SK_KEY;
 
 function App() {
   const [clientSecret, setClientSecret] = useState("");
@@ -19,7 +17,7 @@ function App() {
         const response = await fetch("https://api.stripe.com/v1/payment_intents", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${STRIPE_SECRET_KEY}`,
+            "Authorization": `Bearer ${import.meta.env.VITE_SK_KEY}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: new URLSearchParams({
